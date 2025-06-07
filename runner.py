@@ -1,8 +1,10 @@
+import pandas as pd
+
 from util.basic_tools import *
 from util.text_preprocessing_util import preprocess_DataFrame
 from CrawlReviews.crawl_with_selenium import crawl_google_store_review_with_selenium
 from CrawlReviews.crawl_with_scraper import crawl_google_store_review_with_scraper
-from SentimentAnalysis.sentiment_model_based import make_json_file, make_sentiment_columns
+from SentimentAnalysis.sentiment_model_based import make_json_file, make_sentiment_columns, replace_sentiment_label_to_score
 
 def scraper_crawl_google_store_review(app_package, app_name):
     # 구글 스토어 스크래퍼
@@ -33,10 +35,13 @@ def get_sentiment_analysis_result_with_model(pre_processed_df, app_name):
     result_dict = make_json_file(pre_processed_df, tokenizer, model, device, sentiment_map)
     save_json(f"result/{app_name}_sentiment_result.json", result_dict)
 
+def replace_sentiment_as_score(df):
+    replace_sentiment_label_to_score(df)
 
-if __name__ == '__main__':
+if __name__ == '__main__': # python -m runner로 실행 (모듈로)
+    # app_package, app_name = 'net.skyscanner.android.main', 'skyscanner'
     # uber_taxi_google_url = 'https://play.google.com/store/apps/details?id=com.ubercab&hl=ko'
     # app_name = 'uber_taxi'
-    #
-    # app_package, app_name = 'net.skyscanner.android.main', 'skyscanner'
-    print()
+
+    df = pd.read_csv('result/kakao_taxi_sentiment_analyzed_with_model.csv')
+    replace_sentiment_as_score(df)
