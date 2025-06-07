@@ -2,7 +2,7 @@ import os
 import re
 import pandas as pd
 import numpy as np
-from basic_tools import load_kiwi, load_typo_dict
+from .basic_tools import load_kiwi, load_typo_dict
 
 def remove_tag(text):
     if isinstance(text, str):

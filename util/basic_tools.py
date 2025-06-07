@@ -1,9 +1,11 @@
+import os
 import json
 import torch
 from kiwipiepy import Kiwi
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 def save_json(fileSavePath, saveFile):
+    os.makedirs('result', exist_ok=True)
     with open(fileSavePath, "w", encoding="utf-8") as f:
         json.dump(saveFile, f, ensure_ascii=False, indent=2)
     print(f"{fileSavePath} file 생성 완료")
@@ -11,13 +13,13 @@ def save_json(fileSavePath, saveFile):
 def load_device():
     return torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
 def load_tokenizer():
+    # https://huggingface.co/nlp04/korean_sentiment_analysis_kcelectra
     tokenizer = AutoTokenizer.from_pretrained("nlp04/korean_sentiment_analysis_kcelectra")
     return tokenizer
 
-
 def load_model():
+    # https://huggingface.co/nlp04/korean_sentiment_analysis_kcelectra
     model = AutoModelForSequenceClassification.from_pretrained("nlp04/korean_sentiment_analysis_kcelectra")
     return model
 
