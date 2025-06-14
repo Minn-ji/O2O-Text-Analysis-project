@@ -52,8 +52,8 @@ def make_sentiment_columns(df, tokenizer, model, device, app_name='kakao_taxi'):
     df['sentiment'] = df['reviews'].apply(lambda x: predict_sentiment(x, tokenizer, model, device))
 
     os.makedirs('result', exist_ok=True)
-    df.to_csv(f'result/{app_name}_sentiment_analyzed.csv', index=False)
-    print(f'result/{app_name}_sentiment_analyzed.csv 저장완료!')
+    df.to_csv(f'result/{app_name}_sentiment_analyzed_with_model.csv', index=False)
+    print(f'result/{app_name}_sentiment_analyzed_with_model.csv 저장완료!')
 
 
 
