@@ -6,7 +6,8 @@ from util.text_preprocessing_util import preprocess_DataFrame
 # from CrawlReviews.crawl_with_scraper import crawl_google_store_review_with_scraper
 from SentimentAnalysis.sentiment_model_based import make_json_file, make_sentiment_columns, replace_sentiment_label_to_score
 from WordCloud.draw_wordCloud import generate_wordcloud
-from WordCloud.draw_wordCloud_sw import generate_wordcloud_sw
+# from WordCloud.draw_wordCloud_sw import generate_wordcloud_sw
+from TopicModeling.topic_modeling import merge_text, generate_word_dict_corpus
 
 #def scraper_crawl_google_store_review(app_package, app_name):
     # 구글 스토어 스크래퍼
@@ -23,11 +24,11 @@ def preprocess_review_df(df, app_name):
     kiwi = load_kiwi()
     preprocess_DataFrame(df, kiwi, typo_dict, app_name)
 
-def get_sentiment_column(pre_processed_df, app_name):
-    tokenizer = load_tokenizer()
-    model = load_model()
-    device = load_device()
-    make_sentiment_columns(pre_processed_df, tokenizer, model, device, app_name)
+def get_sentiment_column(app_name):
+    # tokenizer = load_tokenizer()
+    # model = load_model()
+    # device = load_device()
+    # make_sentiment_columns(pre_processed_df, tokenizer, model, device, app_name)
     senti_added_df = pd.read_csv(f'result/{app_name}_sentiment_analyzed_with_model.csv')
     replace_sentiment_label_to_score(senti_added_df) # 성능 보여줌
 
@@ -41,17 +42,32 @@ def get_sentiment_column(pre_processed_df, app_name):
 #     save_json(f"result/{app_name}_sentiment_result.json", result_dict)
 
 def get_wordcloud(preprocessed_df, app_name):
-    # generate_wordcloud(preprocessed_df, app_name)
-    generate_wordcloud_sw(preprocessed_df, app_name)
+    generate_wordcloud(preprocessed_df, app_name)
+    # generate_wordcloud_sw(preprocessed_df, app_name)
+
+def merge_reviews_for_topic_modeling(df, app_name):
+    merge_text(df, app_name)
+
+def set_dict_corpus_for_topic_modeling():
+    generate_word_dict_corpus()
 
 if __name__ == '__main__': # python -m runner로 실행 (모듈로)
     # preprocessed_kakao = pd.read_csv('assets/kakao_taxi_store_merged_scraper_10years_preprocessed.csv')
-    # get_sentiment_column(preprocessed_kakao, 'kakao_taxi')
+    # get_sentiment_column('skyscanner')
     # get_wordcloud(preprocessed_kakao, 'kakao_taxi')
     #
     # preprocessed_uber = pd.read_csv('assets/uber_taxi_store_merged_scraper_10years_preprocessed.csv')
     # get_wordcloud(preprocessed_uber, 'uber_taxi')
 
-    preprocessed_skyscanner = pd.read_csv('assets/skyscanner_reviews_korean_last.csv')
-    get_wordcloud(preprocessed_skyscanner, 'skyscanner')
+    # preprocessed_skyscanner = pd.read_csv('assets/skyscanner_reviews_korean_last.csv')
+    # get_wordcloud(preprocessed_skyscanner, 'skyscanner')
+
+    # kakao_df = pd.read_csv('result/kakao_taxi_sentiment_analyzed_with_model.csv')
+    # uber_df = pd.read_csv('result/uber_taxi_sentiment_analyzed_with_model.csv')
+    # yogiyo_df = pd.read_csv('result/yogiyo_sentiment_analyzed_with_model.csv')
+    # skyscanner_df = pd.read_csv('result/skyscanner_sentiment_analyzed_with_model.csv')
+    # yeogi_df = pd.read_csv('result/yeogi_sentiment_analyzed_with_model.csv')
+    # nol_df = pd.read_csv('result/nol_sentiment_analyzed_with_model.csv')
+    # merge_reviews_for_topic_modeling(kakao_df, 'kakao_taxi')
+    set_dict_corpus_for_topic_modeling()
 
