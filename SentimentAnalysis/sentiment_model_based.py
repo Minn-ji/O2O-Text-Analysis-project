@@ -40,16 +40,16 @@ def replace_sentiment_label_to_score(df):
 
 def make_json_file(df, tokenizer, model, device, sentiment_map):
     result_dict = []
-    for sentence in df['reviews']:
+    for sentence in df['text']:
         pred = predict_sentiment(sentence, tokenizer, model, device)
-        result = {'review': sentence, 'sentiment': sentiment_map[pred], 'sentiment_number': pred}
+        result = {'text': sentence, 'sentiment': sentiment_map[pred], 'sentiment_number': pred}
         result_dict.append(result)
 
     return result_dict
 
 
 def make_sentiment_columns(df, tokenizer, model, device, app_name='kakao_taxi'):
-    df['sentiment'] = df['reviews'].apply(lambda x: predict_sentiment(x, tokenizer, model, device))
+    df['sentiment'] = df['text'].apply(lambda x: predict_sentiment(x, tokenizer, model, device))
 
     os.makedirs('result', exist_ok=True)
     df.to_csv(f'result/{app_name}_sentiment_analyzed_with_model.csv', index=False)
