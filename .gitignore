@@ -1,2 +1,3 @@
 *.pyc
 /result
+/crawled_raw_csv_data
