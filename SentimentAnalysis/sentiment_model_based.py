@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from util.basic_tools import load_tokenizer, load_model, load_device, get_sentiment_map
 
 def predict_sentiment(text, tokenizer, model, device):
+    model = model.to(device)
     inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True).to(device)
     with torch.no_grad():
         outputs = model(**inputs)
