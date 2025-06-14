@@ -3,13 +3,14 @@ import pandas as pd
 from util.basic_tools import *
 from util.text_preprocessing_util import preprocess_DataFrame
 # from CrawlReviews.crawl_with_selenium import crawl_google_store_review_with_selenium
-from CrawlReviews.crawl_with_scraper import crawl_google_store_review_with_scraper
+# from CrawlReviews.crawl_with_scraper import crawl_google_store_review_with_scraper
 from SentimentAnalysis.sentiment_model_based import make_json_file, make_sentiment_columns, replace_sentiment_label_to_score
 from WordCloud.draw_wordCloud import generate_wordcloud
+from WordCloud.draw_wordCloud_sw import generate_wordcloud_sw
 
-def scraper_crawl_google_store_review(app_package, app_name):
+#def scraper_crawl_google_store_review(app_package, app_name):
     # 구글 스토어 스크래퍼
-    crawl_google_store_review_with_scraper(app_package, app_name)
+    # crawl_google_store_review_with_scraper(app_package, app_name)
 
 # def selenium_crawl_google_store_review(url, app_name):
 #     # 셀레니움 구글 스토어
@@ -40,16 +41,17 @@ def get_sentiment_column(pre_processed_df, app_name):
 #     save_json(f"result/{app_name}_sentiment_result.json", result_dict)
 
 def get_wordcloud(preprocessed_df, app_name):
-    generate_wordcloud(preprocessed_df, app_name)
+    # generate_wordcloud(preprocessed_df, app_name)
+    generate_wordcloud_sw(preprocessed_df, app_name)
 
 if __name__ == '__main__': # python -m runner로 실행 (모듈로)
-    preprocessed_kakao = pd.read_csv('assets/kakao_taxi_store_merged_scraper_10years_preprocessed.csv')
-    get_sentiment_column(preprocessed_kakao, 'kakao_taxi')
+    # preprocessed_kakao = pd.read_csv('assets/kakao_taxi_store_merged_scraper_10years_preprocessed.csv')
+    # get_sentiment_column(preprocessed_kakao, 'kakao_taxi')
     # get_wordcloud(preprocessed_kakao, 'kakao_taxi')
     #
     # preprocessed_uber = pd.read_csv('assets/uber_taxi_store_merged_scraper_10years_preprocessed.csv')
     # get_wordcloud(preprocessed_uber, 'uber_taxi')
 
-    # preprocessed_airbnb = pd.read_csv('assets/airbnb_sentiment_analyzed.csv')
-    # get_sentiment_column(preprocessed_airbnb, 'airbnb')
+    preprocessed_skyscanner = pd.read_csv('assets/skyscanner_reviews_korean_last.csv')
+    get_wordcloud(preprocessed_skyscanner, 'skyscanner')
 
