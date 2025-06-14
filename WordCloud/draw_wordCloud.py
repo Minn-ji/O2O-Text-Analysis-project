@@ -17,7 +17,7 @@ def generate_wordcloud(df, app_name):
         analyzed = kiwi.analyze(text)
         for sentence in analyzed:
             for word, tag, _, _ in sentence[0]:  # 형태소 정보만 추출
-                if tag not in ['NNG', 'NNP', 'NNB', 'NP', 'NR', 'JKS', 'JKC', 'JKG', 'JKB', 'JKV', 'JKQ', 'JC', 'SF', 'SE', 'SSO', 'SSC', 'SC', 'SY', 'SH', 'SL']:
+                if tag in ['XR']: #  not in ['NNG', 'NNP', 'NNB', 'NP', 'NR', 'JKS', 'JKC', 'JKG', 'JKB', 'JKV', 'JKQ', 'JC', 'SF', 'SE', 'SSO', 'SSC', 'SC', 'SY', 'SH', 'SL']:
                     # 안될경우 tag in ['XR']:
                     tokens.append(word)
 

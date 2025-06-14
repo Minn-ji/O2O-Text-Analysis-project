@@ -43,12 +43,13 @@ def get_wordcloud(preprocessed_df, app_name):
     generate_wordcloud(preprocessed_df, app_name)
 
 if __name__ == '__main__': # python -m runner로 실행 (모듈로)
-    # app_package, app_name = 'net.skyscanner.android.main', 'skyscanner'
-    # uber_taxi_google_url = 'https://play.google.com/store/apps/details?id=com.ubercab&hl=ko'
-    # app_name = 'uber_taxi'
+    preprocessed_kakao = pd.read_csv('assets/kakao_taxi_store_merged_scraper_10years_preprocessed.csv')
+    get_sentiment_column(preprocessed_kakao, 'kakao_taxi')
+    # get_wordcloud(preprocessed_kakao, 'kakao_taxi')
+    #
+    # preprocessed_uber = pd.read_csv('assets/uber_taxi_store_merged_scraper_10years_preprocessed.csv')
+    # get_wordcloud(preprocessed_uber, 'uber_taxi')
 
-    # df = pd.read_csv('크롤링된_데이터_위치.csv')
-    # get_sentiment_column(df, app_name='kakao_taxi등_직접지정')
-    preprocessed_df = pd.read_csv('assets/kako_taxi_store_merged_scraper_10years_preprocessed.csv')
-    get_wordcloud(preprocessed_df, 'kakao_test')
+    # preprocessed_airbnb = pd.read_csv('assets/airbnb_sentiment_analyzed.csv')
+    # get_sentiment_column(preprocessed_airbnb, 'airbnb')
 
