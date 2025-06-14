@@ -1,0 +1,41 @@
+plot_average_score_over_time
+: 평균 점수 추이 (연도/월 기준)
+
+plot_cumulative_reviews
+: 누적 리뷰 수 추이
+
+plot_daily_reviews_by_year
+: 특정 연도의 일 별 리뷰 수 그래프 작성
+
+plot_daily_reviews_with_outliers
+: 탐색된 이상치 그래프 작성
+
+plot_monthly_review_counts
+: 월 별 리뷰 수 그래프 작성
+
+plot_review_length_by_score
+: 점수별 리뷰 길이 비교
+
+plot_review_length_distribution
+: 리뷰 길이 분포 분석
+
+plot_reviews_by_time_block
+: 시간대 별 리뷰 작성
+
+plot_reviews_for_month
+: 일 별 리뷰 수 그래프 작성
+
+plot_reviews_per_quarter
+: 분기 별 리뷰 수 그래프 작성
+
+plot_reviews_per_weekday
+: 요일별 리뷰 빈도
+
+plot_reviews_per_year
+: 연도 별 리뷰 수
+
+plot_score_distribution
+: 점수 분포 시각화
+
+save_plot
+: 마지막 출력 이미지를 저장
