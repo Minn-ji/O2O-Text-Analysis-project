@@ -42,7 +42,7 @@ def get_sentiment_analysis_result_with_model(pre_processed_df, app_name):
 
 def get_wordcloud(preprocessed_df, app_name):
     generate_wordcloud(preprocessed_df, app_name)
-    # generate_wordcloud_sw(preprocessed_df, app_name)
+    # generate_wordcloud_sw(preprocessed_df, app_name=app_name)
 
 def merge_reviews_for_topic_modeling(kakao_df, uber_df, yogiyo_df, yeogi_df, skyscanner_df, nol_df):
     return_merge_df(kakao_df, uber_df, yogiyo_df, yeogi_df, skyscanner_df, nol_df)
@@ -66,7 +66,7 @@ if __name__ == '__main__': # python -m runner로 실행 (모듈로)
     ## 3-1. 모델 기반 감성 분석 (사전 기반은 도메인 내부에서 실행)
     get_sentiment_column(app_name=app_name)
     
-    ## 3-2. 워드클라우드 생성
+    ## 3-2. 워드클라우드 생성 (이상치에 대한 wc는 도메인 내부 ipynb로 실행)
     preprocessed_kakao_df = pd.read_csv(f'result/{app_name}_google_store_scraper_10years_preprocessed.csv')
     get_wordcloud(preprocessed_kakao_df, app_name=app_name)
 

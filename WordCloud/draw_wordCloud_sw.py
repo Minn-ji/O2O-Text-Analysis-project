@@ -1,3 +1,4 @@
+import os
 from konlpy.tag import Okt
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
@@ -8,7 +9,7 @@ rcParams['font.family'] = 'Malgun Gothic'
 rcParams['axes.unicode_minus'] = False
 
 
-def generate_wordcloud_sw(df, app_name):
+def generate_wordcloud_sw(df, app_name, stop_list=None):
     # 형태소 분석기
     okt = Okt()
 
@@ -19,7 +20,10 @@ def generate_wordcloud_sw(df, app_name):
         tokens += [word for word, tag in pos_tags if tag not in ['Noun', 'Josa', 'Punctuation', 'Foreign', 'Alpha']]
 
     # 불용어 제거
-    stopwords = ['하다', '되다', '있다', '없다', '되었', '해주다']
+    if stop_list==None:
+        stopwords = ['하다', '되다', '있다', '없다', '되었', '해주다']
+    else:
+        stopwords = stop_list
     tokens = [word for word in tokens if word not in stopwords and len(word) > 1]
 
     # 단어 빈도수 계산
@@ -33,7 +37,8 @@ def generate_wordcloud_sw(df, app_name):
         width=800,
         height=600
     ).generate_from_frequencies(word_freq)
-
+    
+    os.makedirs('result', exist_ok=True)
     # 시각화
     plt.figure(figsize=(10, 8))
     plt.imshow(wc, interpolation='bilinear')
