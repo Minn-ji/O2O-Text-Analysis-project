@@ -43,7 +43,7 @@ def preprocess_DataFrame(df, kiwi, typo_dict, app_name):
 
 
 if __name__ == '__main__': # 상단에서 모듈로 돌려야함
-    df = pd.read_csv('assets/요기요_reviews_korean_only')
+    df = pd.read_csv('result/yogiyo_google_store_scraper_10years.csv')
     typo_dict = load_typo_dict()
     kiwi = load_kiwi()
     preprocess_DataFrame(df, kiwi, typo_dict, 'yogiyo')
